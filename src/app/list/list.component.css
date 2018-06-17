@@ -1,0 +1,37 @@
+.div1
+{
+    margin: 10px 10px 10px 10px;
+background-color: aqua;
+}
+li{
+    list-style: none;
+    color:black;
+ border:1px solid green;
+ border-radius: 5px;
+ margin-bottom: 2px;
+ padding: 5px;
+
+}
+ul{
+    padding:0px;
+}
+
+.h_pr
+{
+    background-color:darkgreen;
+}
+.m_pr
+{
+    background-color:green;
+}
+.l_pr
+{
+    background-color: lightgreen;
+}
+.c1{
+    background-color: yellow;
+    border:1px solid cyan;
+    border-radius: 5px;
+    color: crimson;
+    text-decoration: line-through;
+}

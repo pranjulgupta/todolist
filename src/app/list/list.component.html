@@ -1,0 +1,24 @@
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container">
+<div class="div1">
+    <span>Enter Task</span>
+<input class="form-control" type="text" id="mytext" [(ngModel)]="newTask"><br>
+<span>Select Priority</span>
+<select class="btn btn-secondary dropdown-toggle" [(ngModel)]="newpriority">
+  <option  *ngFor ="let priority of priorities">{{priority}}</option>
+  
+</select>
+<button *ngIf="mode" (click)="add()">Add To List</button><br><br>
+<button *ngIf="!mode" (click)="update()">update</button><br><br>
+
+<h1  class="font-italic"><span>Your Panding task:  </span>{{panding()}}/{{tasks.length}}</h1>
+<ul>     
+    <li class="animated lightSpeedIn" *ngFor="let task of tasks; let i=index; " [ngClass]="{'h_pr':task.priority=='high','m_pr':task.priority=='medium','l_pr':task.priority=='low','c1':task.status==true}" (click)="toggle(i)">{{task.name}} {{today |  date:'short'}}  {{task.priority}}<button class="btn btn-danger" input type="submit" (click)="remove(i)"><i class="fa fa-trash"></i>Delete</button>  <button  class="btn btn-secondary" (click)="Edit(i)"> <span class="glyphicon glyphicon-pencil"></span> Edit</button>
+
+  </li>
+
+
+</ul>
+
+</div>
