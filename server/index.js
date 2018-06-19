@@ -4,40 +4,60 @@ const cors=require('cors');
 const app=express();
 var db;
 var MongoClient = require('mongodb').MongoClient
-, assert = require('assert');
+, assert = require('assert'),
+ ObjectID = require('mongodb').ObjectID
 var url = 'mongodb://localhost:27017';
 MongoClient.connect(url, function(err, client) {
   assert.equal(null, err);
-  console.log("Connected successfully to server");
+
 db=client.db("todo");
 })
 app.use(cors());
 app.use(bodyparser.json())
-app.get("/home",function(req,res)
-{
-    // db.collection('list').insertOne({"name":"task4","priority":"high","status":true}, function(err, r) {
-    //     assert.equal(null, err);
-    //     assert.equal(1, r.insertedCount);
-    //     console.log(r.insertedCount);
-    // })
-    // db.collection('list').updateOne({"name":"task6"}, {$set: {"name":"task5"}}, function(err, r) {
-    //     assert.equal(null, err);
-    //     assert.equal(1, r.matchedCount);
-    //     assert.equal(1, r.modifiedCount);
-    //     console.log(r.matchedCount);
-    //     console.log(r.modifiedCount);
-    // })
-    // db.collection('list').deleteOne({"name":"task2"}, function(err, r) {
-    //     assert.equal(null, err);
-    //     assert.equal(1, r.deletedCount);
-    // })  
-    db.collection('list').find().toArray(function(err,result){
-        res.json(result)
-    })
+app.use(bodyparser.urlencoded({ extended: true }))
+
+
+app.post("/home",function(req,res)
+{ let tasks=req.body;  
   
+    db.collection('list1').insertOne(tasks, function(err, r) {
+       res.json(r);
+      
+    })
     
+})
+app.post('/home1',function(req,res)
+{
+    db.collection('list1').find({}).toArray(function(err,result){
+       res.json(result)
+     })
+})
+app.post('/home2',function(req,res)
+{let tasks1=req.body;
+    db.collection('list1').deleteOne(tasks1, function(err, r) {
+        res.json(r);
+    })
+})
+app.post('/home3',function(req,res)
+{let name=req.body.name;
+    let priority=req.body.priority;
+let id1=req.body.id;
+console.log(id1);
+    db.collection('list1').updateOne({'_id': ObjectID(id1)},{$set:{'name':name,'priority':priority}}, function(err, r) {
+        res.json(r);
+        })
+})
+
+app.post('/home4',function(req,res)
+{let status1=req.body.status;
+let id1=req.body.id;
+    db.collection('list1').updateOne({'_id': ObjectID(id1)},{$set:{'status':status1}}, function(err, r) {
+        res.json(r);
+        })
 })
 app.listen(8080,function()
 {
+
     console.log("server Start")
 })
+
