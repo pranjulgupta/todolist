@@ -1,12 +1,19 @@
 const express=require('express');
 const bodyparser=require('body-parser');
 const cors=require('cors');
+const path=require('path')
 const app=express();
 var db;
 var MongoClient = require('mongodb').MongoClient
 , assert = require('assert'),
  ObjectID = require('mongodb').ObjectID
 var url = 'mongodb://localhost:27017';
+app.use(express.static(__dirname+'/dist/angular6'));
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname+ '/dist/angular6/index.html'));
+  });
+
+
 MongoClient.connect(url, function(err, client) {
   assert.equal(null, err);
 

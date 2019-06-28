@@ -16,11 +16,12 @@ priorities=["low","medium","high"];
  selectindex;
 newTask:string;
 newpriority:string;
-url="http://localhost:8080/home";
-url1="http://localhost:8080/home1";
-url2="http://localhost:8080/home2";
-url3="http://localhost:8080/home3";
-url4="http://localhost:8080/home4";
+url="/home";
+url1="/home1";
+url2="/home2";
+url3="/home3";
+url4="/home4";
+
   constructor(private _http:HttpClient) { }
 
   add()
@@ -88,9 +89,26 @@ ngOnInit() {
   this._http.post(this.url1,{}).subscribe((tasks1:any)=>
 {
   this.tasks=tasks1;
-console.log(tasks1)
+
 })
 }
 }
+/*
+    note ---- {title, note}
+*/
+
+
+// addNote(note) {
+//     n.getItem('cards').then(data => {
+//         let newArray = [];
+//         newArray.push(note);
+//         let newData = data.concat(newArray);
+//         n.setItem('cards',newData).then(
+//             () => console.log('Stored item!'),
+//             error => console.error('Error storing item', error)
+//     );
+//     }, err => {
+//     });
+// } 
 
 
